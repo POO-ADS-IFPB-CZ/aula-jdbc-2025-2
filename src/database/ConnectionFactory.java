@@ -1,29 +1,30 @@
 package database;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConnectionFactory {
 
     private Connection connection;
 
     public Connection getConnection() throws ClassNotFoundException,
-            SQLException {
+            SQLException, IOException {
         Class.forName("org.postgresql.Driver");
 
-        //Jeito errado - não façam isso em casa
-        String user = "postgres.sphgmydbqqijloubhavg";
-        String password = "Mmp6mPNWXX2B9gHO";
-        String host = "aws-1-us-east-2.pooler.supabase.com";
-        int port = 5432;
-        String database = "postgres";
-
+        FileInputStream in = new
+                FileInputStream("database.properties");
+        Properties properties = new Properties();
+        properties.load(in);
         //TODO: trocar para StringBuilder
         connection = DriverManager.getConnection(
-                "jdbc:postgresql://"+host+":"+port+"/"+database,
-                user,
-                password
+                "jdbc:postgresql://"+properties.get("host")+":"+properties.get("port")+"/"+properties.get("database"),
+                ""+properties.get("user"),
+                ""+properties.get("password")
         );
 
         return connection;
