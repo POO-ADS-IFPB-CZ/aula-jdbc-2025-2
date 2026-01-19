@@ -22,7 +22,9 @@ public class ConnectionFactory {
         properties.load(in);
         //TODO: trocar para StringBuilder
         connection = DriverManager.getConnection(
-                "jdbc:postgresql://"+properties.get("host")+":"+properties.get("port")+"/"+properties.get("database"),
+                "jdbc:postgresql://"+properties.get("host")+":"+
+                        properties.get("port")+"/"+
+                        properties.get("database"),
                 ""+properties.get("user"),
                 ""+properties.get("password")
         );
