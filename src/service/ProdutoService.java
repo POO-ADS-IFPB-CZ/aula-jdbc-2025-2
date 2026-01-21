@@ -36,4 +36,17 @@ public class ProdutoService {
         }
     }
 
+    public boolean salvar(Produto produto) throws SQLException,
+            IOException, ClassNotFoundException {
+        try(Connection connection = connectionFactory.getConnection()){
+            PreparedStatement pstmt = connection.prepareStatement(
+                    "INSERT INTO produto VALUES (?,?,?)"
+            );
+            pstmt.setInt(1, produto.getCodigo());
+            pstmt.setString(2, produto.getDescricao());
+            pstmt.setDouble(3, produto.getPreco());
+            return pstmt.executeUpdate() > 0;
+        }
+    }
+
 }
