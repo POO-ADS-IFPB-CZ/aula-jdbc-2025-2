@@ -13,9 +13,7 @@ public class Main {
         ProdutoService produtoService = new ProdutoService();
 
         try{
-            System.out.println(produtoService.deletar(
-                    new Produto(2,"Tanto faz", 0)
-            ));
+            System.out.println(produtoService.buscar(1));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
