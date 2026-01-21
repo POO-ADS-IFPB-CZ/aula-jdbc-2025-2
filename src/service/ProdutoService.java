@@ -36,6 +36,22 @@ public class ProdutoService {
         }
     }
 
+    public Produto buscar(int codigo) throws SQLException, IOException,
+            ClassNotFoundException {
+        try(Connection connection = connectionFactory.getConnection()){
+            PreparedStatement pstm = connection.prepareStatement(
+                    "SELECT * FROM produto WHERE codigo=?");
+            pstm.setInt(1, codigo);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                String descricao = rs.getString("descricao");
+                double preco = rs.getDouble("preco");
+                return new Produto(codigo, descricao, preco);
+            }
+            return null;
+        }
+    }
+
     public boolean salvar(Produto produto) throws SQLException,
             IOException, ClassNotFoundException {
         try(Connection connection = connectionFactory.getConnection()){
