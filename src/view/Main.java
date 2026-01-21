@@ -1,26 +1,23 @@
 package view;
 
-import database.ConnectionFactory;
+import service.ProdutoService;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        try {
-            Connection connection = connectionFactory.getConnection();
-            if (connection != null){
-                System.out.println("Conectado ao banco");
-            }
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        ProdutoService produtoService = new ProdutoService();
+
+        try{
+            System.out.println(produtoService.listar());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
