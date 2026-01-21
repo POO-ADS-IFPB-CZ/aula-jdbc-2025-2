@@ -13,8 +13,8 @@ public class Main {
         ProdutoService produtoService = new ProdutoService();
 
         try{
-            System.out.println(produtoService.salvar(
-                    new Produto(3,"Macarrão", 3.45)
+            System.out.println(produtoService.atualizar(
+                    new Produto(1,"Arroz Parbolizado", 4.65)
             ));
         } catch (SQLException e) {
             throw new RuntimeException(e);
