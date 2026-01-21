@@ -1,5 +1,6 @@
 package view;
 
+import model.Produto;
 import service.ProdutoService;
 
 import java.io.IOException;
@@ -12,7 +13,9 @@ public class Main {
         ProdutoService produtoService = new ProdutoService();
 
         try{
-            System.out.println(produtoService.listar());
+            System.out.println(produtoService.salvar(
+                    new Produto(3,"Macarrão", 3.45)
+            ));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
