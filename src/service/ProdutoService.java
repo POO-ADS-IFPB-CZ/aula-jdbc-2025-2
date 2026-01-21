@@ -49,4 +49,17 @@ public class ProdutoService {
         }
     }
 
+    public boolean atualizar(Produto produto) throws SQLException,
+            IOException, ClassNotFoundException {
+        try(Connection connection = connectionFactory.getConnection()){
+            PreparedStatement pstmt = connection.prepareStatement(
+                "UPDATE produto SET descricao=?, preco=? WHERE codigo=?"
+            );
+            pstmt.setString(1, produto.getDescricao());
+            pstmt.setDouble(2, produto.getPreco());
+            pstmt.setInt(3, produto.getCodigo());
+            return pstmt.executeUpdate() > 0;
+        }
+    }
+
 }
