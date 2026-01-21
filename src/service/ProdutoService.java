@@ -62,4 +62,15 @@ public class ProdutoService {
         }
     }
 
+    public boolean deletar(Produto produto) throws SQLException,
+            IOException, ClassNotFoundException {
+        try(Connection connection = connectionFactory.getConnection()){
+            PreparedStatement pstmt = connection.prepareStatement(
+                    "DELETE FROM produto WHERE codigo=?"
+            );
+            pstmt.setInt(1, produto.getCodigo());
+            return pstmt.executeUpdate() > 0;
+        }
+    }
+
 }
